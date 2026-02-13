@@ -1,0 +1,282 @@
+/* ------------------- Reset and Theme Variables ------------------- */
+:root {
+    --primary-green: #00A859;
+    --dark-green: #006400;
+    --light-green: #E8F8F5;
+    --bg-color: #f7f7f7;
+    --border-color: #ddd;
+    --transition-speed: 0.6s; /* एनीमेशन की गति */
+}
+
+/* ------------------- Auth Wrapper (Split Layout) ------------------- */
+.auth-wrapper {
+    /* Navigation और Footer के बीच की जगह भरने के लिए */
+    min-height: calc(100vh - 180px); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* एनीमेशन के लिए आवश्यक */
+    padding: 30px 0;
+}
+
+.auth-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 
+                0 10px 10px rgba(0, 0, 0, 0.22);
+    position: relative;
+    width: 900px; /* कुल चौड़ाई */
+    max-width: 100%;
+    min-height: 620px;
+    overflow: hidden;
+}
+
+/* ------------------- Panels (Left and Right) ------------------- */
+.visual-panel, .form-panel {
+    position: absolute;
+    top: 0;
+    overflow: hidden;
+    height: 100%;
+    transition: transform var(--transition-speed) ease-in-out;
+}
+
+/* Left Panel: Visuals/Sign Up Info */
+.visual-panel {
+    left: 0;
+    width: 50%;
+    overflow: hidden;
+    z-index: 100;
+    background-color: var(--light-green); /* ग्रीन टोन बैकग्राउंड */
+    border-radius: 10px 0 0 10px;
+}
+
+/* Right Panel: Forms */
+.form-panel {
+    left: 50%; /* शुरुआत में राइट साइड में */
+    width: 50%;
+    overflow: hidden;
+    z-index: 50;
+    background-color: white;
+    padding: 20px;
+}
+
+/* ------------------- Sliding Animation Logic (The Door Effect) ------------------- */
+
+/* When 'right-panel-active' class is added to auth-wrapper (i.e., switching to Sign Up) */
+
+.auth-wrapper.right-panel-active .visual-panel {
+    /* Visual Panel (Left side) slides to the right */
+    transform: translateX(100%); 
+    z-index: 50; 
+    border-radius: 0 10px 10px 0; /* Corner swap */
+}
+
+.auth-wrapper.right-panel-active .form-panel {
+    /* Form Panel (Right side) slides to the left */
+    transform: translateX(-100%); 
+    z-index: 100; 
+}
+
+
+/* ------------------- Visual Panel Content ------------------- */
+.visual-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+    height: 100%;
+    position: relative; 
+    width: 100%;
+    /* opacity control handled by JS using active-visual class */
+    transition: opacity var(--transition-speed) ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+    box-sizing: border-box;
+}
+
+.visual-content.active-visual {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* --- FIX: Visual Sizing and Alignment --- */
+.retina-diagram {
+    width: 60%; /* Adjusted for better proportion */
+    max-width: 250px; /* Ensures it doesn't get too large */
+    height: auto;
+    margin-bottom: 20px;
+}
+/* Placeholder images (Remove if you replace with actual images) */
+.retina-diagram [alt*="retinopathy"], 
+.retina-diagram [alt*="Cataract"] {
+    display: flex; /* Use flex to center content */
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 150px;
+    background-color: #e0f2f1;
+    border: 1px solid var(--primary-green);
+    border-radius: 8px;
+    /* line-height removed due to flex */
+    text-align: center;
+    color: var(--dark-green);
+    font-size: 0.9em;
+}
+
+.visual-content h2 {
+    color: var(--dark-green);
+    font-size: 1.8em; /* Reduced size */
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.visual-content p {
+    color: #444;
+    font-size: 1.1em; /* Set specific font size */
+    padding: 0 10px; /* Added slight horizontal padding */
+}
+
+/* ------------------- Form Panel Content ------------------- */
+.form-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 30px;
+    text-align: center;
+    height: 100%;
+    /* Forms एक दूसरे के ऊपर ओवरलैप करेंगे, JS active-form के साथ opacity कंट्रोल करेगा */
+    position: absolute; 
+    width: 100%;
+    transition: opacity var(--transition-speed) ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.form-box.active-form {
+    opacity: 1;
+    pointer-events: all;
+    position: relative; /* Take up space when active (for large screens) */
+}
+
+
+.form-box h2 {
+    color: var(--dark-green);
+    margin-top: 0;
+    font-size: 2em;
+}
+
+.form-box p {
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    text-align: left;
+    margin-bottom: 15px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--dark-green);
+    font-size: 0.95em;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.forgot-password {
+    float: right;
+    font-size: 0.8em;
+    margin-top: 5px;
+}
+
+.auth-submit-btn {
+    width: 100%;
+    max-width: 420px;
+    background-color: var(--primary-green);
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1em;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.auth-submit-btn:hover {
+    background-color: var(--dark-green);
+    transform: translateY(-2px);
+}
+
+.switch-link {
+    margin-top: 25px;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+/* ------------------- Responsive Design Fixes ------------------- */
+@media (max-width: 768px) {
+    .form-box {
+        position: absolute;
+        height: auto;
+        min-height: 100%;
+    }
+
+
+
+    /* Small Screen: Remove split screen effect */
+    .visual-panel, .form-panel {
+        position: relative;
+        width: 100%;
+        
+        text-align: center;
+        left: 0;
+        transform: none !important; 
+        opacity: 1 !important;
+        z-index: 100;
+        border-radius: 10px;
+    }
+    
+    .visual-panel {
+        display: none; /* Hide visual panel on mobile */
+    }
+    
+    .form-panel {
+        width: 100%;
+        left: 0;
+        padding: 40px 20px;
+        overflow: hidden;
+    }
+
+    /* Form switching using opacity (no sliding) */
+    .form-box {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        padding: 40px 30px;
+        /* width: 100%; */
+        min-height: 100%;
+        overflow-y: auto;
+        top: 0;
+        left: 0;
+        overflow-y: auto;
+        opacity: 0;
+        transform: none !important;
+        transition: opacity 0.5s ease-in-out;
+    }
+}
+    

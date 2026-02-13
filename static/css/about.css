@@ -1,0 +1,132 @@
+/* About Page के लिए विशिष्ट स्टाइलिंग */
+
+:root {
+    --primary-green: #00A859;
+    --dark-green: #006400;
+    --light-green: #E8F8F5;
+}
+
+/* ------------------- Section & Title ------------------- */
+.about-section {
+    padding: 40px 5%;
+    background-color: #f7f7f7;
+    text-align: center;
+}
+
+.page-title {
+    font-size: 2.5em;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 1.1em;
+    margin-bottom: 40px;
+}
+
+/* ------------------- Content Boxes ------------------- */
+.content-box {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    max-width: 900px;
+    margin: 30px auto;
+    text-align: left;
+    border-left: 5px solid var(--primary-green);
+}
+
+.content-box h2 {
+    color: var(--dark-green);
+    margin-top: 0;
+    font-size: 1.8em;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--light-green);
+    margin-bottom: 20px;
+}
+
+.content-box p {
+    color: #444;
+    line-height: 1.7;
+}
+
+/* Tech Stack Specific Styling */
+.tech-stack-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    max-width: 900px;
+    margin: 40px auto;
+    flex-wrap: wrap;
+}
+
+.tech-stack-section .content-box {
+    flex: 1;
+    min-width: 350px;
+    margin: 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.tech-item {
+    background-color: var(--light-green);
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 0.95em;
+    color: #333;
+    transition: transform 0.3s ease;
+}
+
+.tech-item:hover {
+    transform: translateX(5px);
+}
+
+.content-box ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.content-box ul li {
+    padding-left: 25px;
+    margin-bottom: 10px;
+    position: relative;
+    color: #444;
+}
+
+.content-box ul li::before {
+    content: "✔️";
+    color: var(--primary-green);
+    font-weight: 700;
+    position: absolute;
+    left: 0;
+}
+
+/* Disclaimer Final */
+.disclaimer-final {
+    border-left: 5px solid #ffc107; /* Warning color */
+    background-color: #fff8e1;
+}
+
+/* CTA Button at Bottom */
+.start-now-button {
+    margin: 40px auto;
+}
+
+
+/* ------------------- Animations ------------------- */
+.animated-box {
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

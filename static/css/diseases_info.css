@@ -1,0 +1,236 @@
+/* Diseases Info Page के लिए विशिष्ट स्टाइलिंग */
+
+:root {
+    --primary-green: #00A859;
+    --dark-green: #006400;
+    --light-green: #E8F8F5;
+    --border-color: #ddd;
+}
+
+/* ------------------- Section & Title ------------------- */
+.diseases-section {
+    padding: 40px 5%;
+    background-color: #f7f7f7;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 2.5em;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    font-size: 1.1em;
+    margin-bottom: 40px;
+}
+
+/* ------------------- Tabs Container (Layout Fix) ------------------- */
+.tabs-container {
+    background-color: white;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    /* Max width बढ़ाया गया ताकि कंटेंट ज़्यादा जगह ले सके */
+    max-width: 1200px; 
+    margin: 0 auto;
+}
+
+.tabs-nav {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid var(--border-color);
+    background-color: #f0f0f0;
+}
+
+.tab-button {
+    flex-grow: 1;
+    padding: 15px 10px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 1.05em;
+    font-weight: 600;
+    color: #555;
+    transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
+    border-bottom: 3px solid transparent; 
+}
+
+.tab-button:hover:not(.active) {
+    color: var(--primary-green);
+    background-color: #f5f5f5;
+    transform: translateY(-2px); /* Animation */
+}
+
+.tab-button.active {
+    color: var(--dark-green);
+    background-color: white;
+    border-bottom: 3px solid var(--primary-green);
+}
+
+/* ------------------- Tab Content ------------------- */
+.tab-content {
+    padding: 30px;
+    display: none; 
+    align-items: flex-start; 
+    gap: 40px;
+}
+
+.tab-content.active-content {
+    display: block; /* ब्लॉक डिस्प्ले का उपयोग करें ताकि कंटेंट पूरी विड्थ ले */
+}
+
+.disease-title {
+    color: var(--dark-green);
+    font-size: 2em;
+    margin-top: 0;
+    border-bottom: 2px solid var(--light-green);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.text-content p {
+    margin-bottom: 15px;
+    text-align: justify; /* टेक्स्ट को जस्टिफाई किया गया */
+}
+
+.text-content h3 {
+    color: var(--primary-green);
+    margin-top: 25px;
+    font-size: 1.3em;
+}
+
+.text-content ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.text-content ul li {
+    padding-left: 25px;
+    margin-bottom: 10px;
+    position: relative;
+    /* Checkmark आइकन */
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300A859'%3E%3Cpath d='M20.293 4.293l-10 10-4.293-4.293a1 1 0 00-1.414 1.414l5 5a1 1 0 001.414 0l10.707-10.707a1 1 0 00-1.414-1.414z'/%3E%3C/svg%3E") no-repeat left center;
+    background-size: 18px;
+    font-size: 1em;
+    transition: transform 0.2s ease; /* Animation */
+}
+
+.text-content ul li:hover {
+    transform: translateX(5px);
+}
+
+/* Image Placeholder Styling */
+.tab-content > img[alt*="cloudy lens (cataract)"], 
+.tab-content > img[alt*="diabetic retina"],
+.tab-content > img[alt*="Diabetic Retinopathy"],
+.tab-content > img[alt*="Cataract"] {
+    float: right; /* इमेज को राइट में फ्लोट किया गया */
+    width: 40%;
+    margin-left: 20px;
+    margin-bottom: 15px;
+    height: auto; 
+    min-height: 200px;
+    background-color: var(--light-green);
+    border: 1px solid var(--primary-green);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9em;
+    color: var(--dark-green);
+    text-align: center;
+    padding: 10px;
+}
+
+/* Disclaimer Box */
+.disclaimer-box {
+    max-width: 1200px;
+    margin: 40px auto 20px;
+    padding: 20px;
+    background-color: #fff8e1;
+    border-left: 5px solid #ffc107;
+    border-radius: 8px;
+    color: #6a5a40;
+    text-align: left;
+}
+
+/* CTA Button at Bottom */
+.start-prediction-btn {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+/* ------------------- Animations ------------------- */
+.animated-title {
+    animation: fadeInDown 1s ease-out;
+}
+.animated-container {
+    animation: fadeInUp 1.2s ease-out;
+}
+.animated-tab {
+    animation: fadeIn 0.6s ease-in-out;
+}
+.animated-button {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ------------------- Responsive Design (Media Queries) ------------------- */
+
+@media (max-width: 900px) {
+    .tabs-container {
+        max-width: 95%;
+    }
+    
+    .tab-content {
+        padding: 20px;
+    }
+    
+    .tab-content > img[alt*="cloudy lens (cataract)"], 
+    .tab-content > img[alt*="diabetic retina"],
+    .tab-content > img[alt*="Diabetic Retinopathy"],
+    .tab-content > img[alt*="Cataract"] {
+        float: none; /* छोटी स्क्रीन पर इमेज को फ्लोट न करें */
+        width: 80%; /* फुल विड्थ लें */
+        margin: 20px auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .page-title {
+        font-size: 2em;
+    }
+    
+    .tabs-nav {
+        flex-direction: column; /* बटन को स्टैक करें */
+    }
+    
+    .tab-button {
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    .tab-button.active {
+        border-bottom: none;
+        border-left: 5px solid var(--primary-green);
+    }
+    
+    .tab-content {
+        padding: 15px;
+    }
+}

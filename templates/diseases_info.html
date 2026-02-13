@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eye Diseases Information - EyeCare AI</title>
+    <!-- सामान्य CSS फ़ाइल -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <!-- Diseases Info Page के लिए विशिष्ट CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/diseases_info.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header class="main-header">
+        <div class="logo">
+    <a href="{{ url_for('home') }}">
+        <img src="{{ url_for('static', filename='logo.jpg') }}" alt="EyeCare AI Logo">
+    </a>
+</div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+                <li><a href="{{ url_for('diseases_info') }}" class="active">Diseases Info</a></li>
+                {% if session.get('logged_in') %}
+                    <li><a href="{{ url_for('prediction') }}">Prediction</a></li>
+                    <li><a href="{{ url_for('logout') }}" class="cta-button">Logout</a></li>
+                {% else %}
+                    <!-- Sign In/Up Option -->
+                    <li><a href="{{ url_for('login') }}" class="cta-button">Sign In/Up</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Flashed Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flashes">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Diseases Info Section -->
+    <section class="diseases-section">
+        <h1 class="page-title animated-title">Understanding Common <span class="green-text">Eye Diseases</span></h1>
+        <p class="subtitle">Detailed information on conditions detected by our AI model. Use the tabs below to explore each disease.</p>
+
+        <div class="tabs-container animated-container">
+            <!-- Tab Buttons (Nav) -->
+            <div class="tabs-nav">
+                <button class="tab-button active" onclick="openTab(event, 'Glaucoma')">Glaucoma</button>
+                <button class="tab-button" onclick="openTab(event, 'Cataract')">Cataract</button>
+                <button class="tab-button" onclick="openTab(event, 'DiabeticRetinopathy')">Diabetic Retinopathy</button>
+                <button class="tab-button" onclick="openTab(event, 'Myopia')">Myopia</button>
+            </div>
+
+            <!-- Glaucoma Content -->
+            <div id="Glaucoma" class="tab-content active-content animated-tab">
+                <h2 class="disease-title">Glaucoma (काला मोतिया)</h2>
+                <div class="content-flex">
+                    <div class="text-content">
+                        <p>Glaucoma is a group of eye conditions that damage the **optic nerve**, a vital bundle of nerves connecting the eye to the brain. This damage is often caused by abnormally high pressure in your eye, known as intraocular pressure (IOP).</p>
+                        <p>It is often called the **"silent thief of sight"** because peripheral vision loss occurs so gradually that it often goes unnoticed until the disease is in an advanced stage. Early detection through regular comprehensive eye exams is crucial.</p>
+                        
+                        <h3>🔬 Key Facts:</h3>
+                        <ul>
+                            <li>Glaucoma is the second leading cause of blindness worldwide.</li>
+                            <li>The most common type, open-angle glaucoma, develops slowly over time.</li>
+                            <li>Damage caused by glaucoma is permanent and cannot be reversed.</li>
+                        </ul>
+                        
+                        <h3>Symptoms:</h3>
+                        <ul>
+                            <li>Gradual loss of peripheral vision (often unnoticed initially).</li>
+                            <li>Tunnel vision in advanced stages.</li>
+                            <li>Severe eye pain, nausea, and sudden blurred vision (in acute angle-closure glaucoma).</li>
+                        </ul>
+                        
+                        <h3>Treatment & Management:</h3>
+                        <p>Treatment focuses on lowering eye pressure to prevent further damage. This is usually achieved with prescription **eye drops**, oral medications, or surgical procedures like laser treatment or traditional filtering surgery.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cataract Content -->
+            <div id="Cataract" class="tab-content animated-tab">
+                <h2 class="disease-title">Cataract (मोतियाबिंद)</h2>
+                <div class="content-flex">
+                    <div class="text-content">
+                        <p>A **cataract** is a clouding of the clear lens of the eye, which works like a camera lens to focus light onto the retina. When the lens becomes cloudy, it prevents light rays from passing through easily, resulting in blurry or dim vision. [Image of a human eye showing a cloudy lens (cataract)]</p>
+                        <p>Most cataracts develop when aging or injury changes the tissue that makes up the eye's lens. Over time, proteins in the lens clump together, causing the lens to become opaque. While cataracts are common in older adults, they can also occur in younger people.</p>
+                        
+                        <h3>⚠️ Risk Factors:</h3>
+                        <ul>
+                            <li>Age (the biggest risk factor).</li>
+                            <li>Diabetes and obesity.</li>
+                            <li>Excessive exposure to sunlight (UV radiation).</li>
+                            <li>Smoking and previous eye injury or inflammation.</li>
+                        </ul>
+                        
+                        <h3>Symptoms:</h3>
+                        <ul>
+                            <li>Cloudy, blurry, or dim vision.</li>
+                            <li>Increased difficulty with night vision.</li>
+                            <li>Seeing "halos" around lights.</li>
+                            <li>Fading or yellowing of colors.</li>
+                        </ul>
+                        
+                        <h3>Treatment:</h3>
+                        <p>Initially, vision change can be managed with stronger eyeglasses. However, the only effective and permanent treatment is **surgery** to remove the cloudy natural lens and replace it with an artificial intraocular lens (IOL).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diabetic Retinopathy Content -->
+            <div id="DiabeticRetinopathy" class="tab-content animated-tab">
+                <h2 class="disease-title">Diabetic Retinopathy (मधुमेह संबंधी रेटिनोपैथी)</h2>
+                <div class="content-flex">
+                    <div class="text-content">
+                        <p>Diabetic Retinopathy is a severe complication of diabetes caused by damage to the tiny **blood vessels of the retina** (the light-sensitive tissue at the back of the eye). Uncontrolled high blood sugar damages these vessels, causing them to leak fluid or bleed, and in advanced stages, prompting the growth of new, abnormal vessels.</p>
+                        <p>It is one of the leading causes of preventable blindness worldwide. Early detection and strict blood sugar control are the most critical steps to manage and prevent progression. [Image of a diabetic retina showing blood vessel damage and hemorrhages]</p>
+                        
+                        <h3>🔬 Key Stages:</h3>
+                        <ul>
+                            <li>**Non-Proliferative Diabetic Retinopathy (NPDR):** Early stage where microaneurysms (small bulges in vessels) and minor leaks occur.</li>
+                            <li>**Proliferative Diabetic Retinopathy (PDR):** Advanced stage where the retina attempts to compensate by growing new, fragile, abnormal blood vessels (neovascularization), which often bleed and cause scar tissue.</li>
+                        </ul>
+                        
+                        <h3>Symptoms:</h3>
+                        <ul>
+                            <li>Floaters (spots or strings drifting in your vision).</li>
+                            <li>Blurred or distorted vision.</li>
+                            <li>Fluctuating vision (vision changes from day to day).</li>
+                            <li>Impaired color vision.</li>
+                            <li>Dark or empty areas in your overall vision.</li>
+                        </ul>
+                        
+                        <h3>Treatment & Prevention:</h3>
+                        <p>The best prevention is excellent management of **blood glucose** and **blood pressure**. Treatment includes **anti-VEGF injections** (to stop vessel growth), **laser surgery** (photocoagulation to seal leaking vessels), or **vitrectomy** (to remove blood and scar tissue in advanced PDR).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Myopia Content -->
+            <div id="Myopia" class="tab-content animated-tab">
+                <h2 class="disease-title">Myopia (निकट दृष्टि दोष / Nearsightedness)</h2>
+                <div class="content-flex">
+                    <div class="text-content">
+                        <p>Myopia, commonly known as **nearsightedness**, is a refractive error where you can see objects close to you clearly, but distant objects appear blurry. It occurs when the **eyeball is too long** or the cornea is too curved, causing light to focus *in front* of the retina instead of directly *on* it.</p>
+                        <p>Myopia is the most common vision problem globally, and its prevalence is increasing rapidly, particularly among children and young adults due to prolonged near-work activities like using screens.</p>
+                        
+                        <h3>🔬 Key Facts:</h3>
+                        <ul>
+                            <li>**Refractive Error:** यह तब होता है जब आँख का आकार ठीक से प्रकाश को मोड़ता (refract) नहीं है।</li>
+                            <li>**High Myopia Risk:** गंभीर मायोपिया (उच्च निकट दृष्टि दोष) रेटिनल डिटेचमेंट (retinal detachment), ग्लूकोमा (glaucoma), और मोतियाबिंद (cataract) जैसे गंभीर रोगों का खतरा बढ़ा सकता है।</li>
+                        </ul>
+                        
+                        <h3>Symptoms:</h3>
+                        <ul>
+                            <li>Distant objects appear blurred or fuzzy.</li>
+                            <li>आँखों को सिकुड़ना या आधा बंद करना (Squinting) ताकि साफ दिख सके।</li>
+                            <li>Eyestrain और सिरदर्द, खासकर ड्राइविंग या खेल खेलते समय।</li>
+                            <li>रात में गाड़ी चलाने में कठिनाई।</li>
+                        </ul>
+                        
+                        <h3>Correction & Management:</h3>
+                        <p>Correction is usually achieved through **eyeglasses** or **contact lenses** (जो प्रकाश को रेटिना पर सही ढंग से फोकस करने में मदद करते हैं)। वयस्कों के लिए, **लेजर सर्जरी** (जैसे LASIK और PRK) कॉर्निया को स्थायी रूप से नया आकार देकर मायोपिया को ठीक कर सकती है। बच्चों में प्रगति को धीमा करने के लिए एट्रोपिन ड्रॉप्स (Atropine drops) का भी उपयोग किया जाता है।</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="disclaimer-box">
+            <p><strong>Disclaimer:</strong> This information is for educational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of a qualified healthcare provider.</p>
+        </div>
+        
+        <!-- Center CTA Button -->
+        <a href="{{ url_for('prediction') }}" class="main-cta-button start-prediction-btn animated-button">Start Secure Prediction →</a>
+    </section>
+
+    <!-- Detailed Footer Section -->
+    <footer class="pro-footer">
+        <div class="footer-social-bar">
+            <!-- Social Icons (Dummy links) -->
+            <a href="#" class="social-icon-link animated-icon" aria-label="LinkedIn"><img src="https://img.icons8.com/color/48/000000/linkedin.png" alt="LinkedIn"></a>
+            <a href="#" class="social-icon-link animated-icon" aria-label="Twitter"><img src="https://img.icons8.com/color/48/000000/twitter--v1.png" alt="Twitter"></a>
+            <a href="#" class="social-icon-link animated-icon" aria-label="Facebook"><img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook"></a>
+            <a href="#" class="social-icon-link animated-icon" aria-label="Instagram"><img src="https://img.icons8.com/color/48/000000/instagram-new--v1.png" alt="Instagram"></a>
+            <a href="#" class="social-icon-link animated-icon" aria-label="YouTube"><img src="https://img.icons8.com/color/48/000000/youtube-play.png" alt="YouTube"></a>
+        </div>
+        <div class="footer-contact-details">
+            <span class="detail-item email-detail">
+                <i class="icon">📧</i> <a href="mailto:info@eyecareai.com">info@eyecareai.com</a>
+            </span>
+            <span class="detail-item phone-detail">
+                <i class="icon">📞</i> (91) 987-AI-EYE
+            </span>
+            <span class="detail-item address-detail">
+                <i class="icon">📍</i> EyeCare AI, HealthTech Hub, INDIA
+            </span>
+        </div>
+        <div class="footer-bottom-bar">
+            <p>&copy; 2025 EyeCare AI. All Rights Reserved.</p>
+            <nav class="footer-nav-links">
+                <a href="{{ url_for('about') }}">About</a>
+                <a href="#">Team</a>
+                <a href="#">Contact</a>
+                <a href="#">Legal</a>
+            </nav>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Tab Functionality -->
+    <script>
+        function openTab(evt, diseaseName) {
+            var i, tabcontent, tabbuttons;
+
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active-content");
+            }
+
+            tabbuttons = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tabbuttons.length; i++) {
+                tabbuttons[i].className = tabbuttons[i].className.replace(" active", "");
+            }
+
+            document.getElementById(diseaseName).style.display = "block"; // Block display
+            document.getElementById(diseaseName).classList.add("active-content");
+            
+            evt.currentTarget.className += " active";
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Load the default tab on page load
+            document.querySelector('.tab-button').click();
+        });
+    </script>
+</body>
+</html>

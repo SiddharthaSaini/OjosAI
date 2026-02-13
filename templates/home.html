@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eye Health Checkup - Home</title>
+    <!-- CSS फ़ाइल को लिंक करें -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header class="main-header">
+        <div class="logo">
+    <a href="{{ url_for('home') }}">
+        <img src="{{ url_for('static', filename='logo.jpg') }}" alt="EyeCare AI Logo">
+    </a>
+</div>
+
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}" class="active">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+                <li><a href="{{ url_for('diseases_info') }}">Diseases Info</a></li>
+                {% if session.get('logged_in') %}
+                    <li><a href="{{ url_for('prediction') }}">Prediction</a></li>
+                    <li><a href="{{ url_for('logout') }}" class="cta-button">Logout</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('login') }}" class="cta-button">Sign In/Up</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Flashed Messages Section (Login/Logout के लिए) -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flashes">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Protect Your Sight. Predict with <span class="green-text">AI Precision</span>.</h1>
+            <p>Our intelligent system screens for Glaucoma, Cataract, Diabetic Retinopathy, and Myopia using advanced Deep Learning models.</p>
+            <a href="{{ url_for('login') }}" class="main-cta-button animated-button">Start Prediction Now →</a>
+        </div>
+        <!--  -->
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <h2>Why Choose Our Tool?</h2>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <span class="icon">⚡</span>
+                <h3>Fast Results</h3>
+                <p>Get instant analysis and preliminary risk assessment.</p>
+            </div>
+            <div class="feature-item">
+                <span class="icon">🔬</span>
+                <h3>High Accuracy</h3>
+                <p>Trained on extensive medical datasets for reliable outcomes.</p>
+            </div>
+            <div class="feature-item">
+                <span class="icon">📚</span>
+                <h3>Disease Info</h3>
+                <p>Comprehensive information on common eye conditions.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Footer Section -->
+    <footer class="pro-footer">
+        <div class="footer-social-bar">
+            <!-- Social Icons (Dummy links) -->
+            <a href="#" class="social-icon-link animated-icon" aria-label="LinkedIn"><img src="https://img.icons8.com/color/48/000000/linkedin.png" alt="LinkedIn"></a>
+            <a href="#" class="social-icon-link animated-icon" aria-label="Twitter"><img src="https://img.icons8.com/color/48/000000/twitter--v1.png" alt="Twitter"></a>
+            <a href="#" class="social-icon-link animated-icon" aria-label="Facebook"><img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook"></a>
+            <a href="#" class="social-icon-link animated-icon" aria-label="Instagram"><img src="https://img.icons8.com/color/48/000000/instagram-new--v1.png" alt="Instagram"></a>
+            <a href="#" class="social-icon-link animated-icon" aria-label="YouTube"><img src="https://img.icons8.com/color/48/000000/youtube-play.png" alt="YouTube"></a>
+        </div>
+        <div class="footer-contact-details">
+            <span class="detail-item email-detail">
+                <i class="icon">📧</i> <a href="mailto:info@eyecareai.com">info@eyecareai.com</a>
+            </span>
+            <span class="detail-item phone-detail">
+                <i class="icon">📞</i> (91) 987-AI-EYE
+            </span>
+            <span class="detail-item address-detail">
+                <i class="icon">📍</i> EyeCare AI, HealthTech Hub, INDIA
+            </span>
+        </div>
+        <div class="footer-bottom-bar">
+            <p>&copy; 2025 EyeCare AI. All Rights Reserved.</p>
+            <nav class="footer-nav-links">
+                <a href="{{ url_for('about') }}">About</a>
+                <a href="#">Team</a>
+                <a href="#">Contact</a>
+                <a href="#">Legal</a>
+            </nav>
+        </div>
+    </footer>
+    
+    <!-- JavaScript के लिए, अगर आपको इंटरैक्टिविटी चाहिए -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+/* Prediction Page के लिए विशिष्ट स्टाइलिंग */
+
+:root {
+    --primary-green: #00A859;
+    --dark-green: #006400;
+    --light-green: #E8F8F5;
+    --border-color: #ddd;
+}
+
+/* ------------------- Section & Title ------------------- */
+.prediction-section {
+    padding: 40px 5%;
+    background-color: #f7f7f7;
+    text-align: center;
+}
+
+.page-title {
+    font-size: 2.5em;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 1.1em;
+    margin-bottom: 40px;
+}
+
+/* ------------------- Upload Card ------------------- */
+.upload-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    max-width: 500px;
+    margin: 0 auto 40px;
+}
+
+.upload-card h2 {
+    color: var(--dark-green);
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+/* Custom File Input Styling */
+.file-upload-wrapper {
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.file-upload-wrapper input[type="file"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 20px;
+    border: 2px dashed var(--primary-green);
+    border-radius: 8px;
+    background-color: var(--light-green);
+    color: var(--dark-green);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.file-label:hover {
+    background-color: #d1efe4; /* हल्का हरा */
+    border-color: var(--dark-green);
+}
+
+.upload-icon {
+    font-size: 1.5em;
+    margin-right: 10px;
+}
+
+/* Analyze Button */
+.analyze-btn {
+    width: 100%;
+    background-color: var(--dark-green);
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.analyze-btn:hover {
+    background-color: var(--primary-green);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 168, 89, 0.3);
+}
+
+/* ------------------- Result Card ------------------- */
+.result-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    max-width: 600px;
+    margin: 40px auto;
+    border-left: 5px solid var(--primary-green);
+    text-align: left;
+}
+
+.result-card h2 {
+    color: var(--dark-green);
+    border-bottom: 1px solid var(--light-green);
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+.result-details p {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+.result-details strong {
+    color: #444;
+}
+
+.result-disease {
+    color: #cc0000; /* रोग के लिए थोड़ा डार्क या लाल रंग का इस्तेमाल करें */
+    font-weight: 700;
+}
+
+.result-confidence {
+    color: var(--primary-green);
+    font-weight: 700;
+}
+
+.advice-text {
+    background-color: #fff8e1;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 3px solid #ffc107;
+    margin-top: 25px;
+}
+
+.disclaimer-note {
+    margin-top: 20px;
+    font-size: 0.85em;
+    color: #888;
+}
+
+/* ------------------- Animations ------------------- */
+.animated-card, .animated-result {
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}

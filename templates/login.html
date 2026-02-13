@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Sign In / Sign Up - EyeCare AI</title>
+    <!-- सामान्य CSS फ़ाइल -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <!-- Login/Signup के लिए विशिष्ट CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header class="main-header">
+        <div class="logo">
+    <a href="{{ url_for('home') }}">
+        <img src="{{ url_for('static', filename='logo.jpg') }}" alt="EyeCare AI Logo">
+    </a>
+</div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+                <li><a href="{{ url_for('diseases_info') }}">Diseases Info</a></li>
+                <li><a href="{{ url_for('login') }}" class="cta-button active-login">Sign In/Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flashes">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Split Screen Container -->
+    <section class="auth-wrapper" id="auth-wrapper">
+        <div class="auth-container">
+            
+            <!-- Left Side: Visuals Panel (This panel moves) -->
+            <div class="visual-panel animated-panel" id="visual-panel">
+                <!-- Visuals for Sign Up (Active by default) -->
+                <div class="visual-content visual-signup active-visual">
+                    <div class="retina-diagram">
+                       <!-- Diseases Image Placeholder for Sign Up -->
+                       <!-- [Image of a human eye showing Diabetic Retinopathy] -->
+                    </div>
+                    <h2>OJOS AI</h2>
+                    <p>Register to unlock our AI model and start your preliminary eye analysis.</p>
+                </div>
+                
+                <!-- Visuals for Sign In -->
+                <div class="visual-content visual-signin">
+                    <div class="retina-diagram">
+                        <!-- Diseases Image Placeholder for Sign In -->
+                        <!-- [Image of a human eye showing Cataract] -->
+                    </div>
+                    <h2>Welcome Back!</h2>
+                    <p>Continue your journey towards better vision health.</p>
+                </div>
+            </div>
+
+            <!-- Right Side: Forms Container -->
+            <div class="form-panel animated-panel" id="form-panel">
+                
+                <!-- Sign In Form -->
+                <div class="form-box sign-in-box active-form" id="sign-in-box">
+                    <h2>Sign In</h2>
+                    <p>Access your secure portal.</p>
+                    <form method="POST" action="{{ url_for('login') }}" id="signin-form"> 
+                        <div class="form-group">
+                            <label for="signin_email">Email Address</label>
+                            <input type="email" id="signin_email" name="email" required placeholder="user@health.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="signin_password">Password</label>
+                            <input type="password" id="signin_password" name="password" required placeholder="******">
+                            <a href="#" class="forgot-password">Forgot Password?</a>
+                        </div>
+                        <button type="submit" class="auth-submit-btn">Sign In</button>
+                    </form>
+                    <p class="switch-link">Don't have an account? <a href="#" id="to-signup" class="green-text bold">Sign Up</a></p>
+                </div>
+
+                <!-- Sign Up Form -->
+                <div class="form-box sign-up-box" id="sign-up-box">
+                    <h2>Sign Up</h2>
+                    <p>Create your new account today.</p>
+                    <form method="POST" action="{{ url_for('signup') }}" id="signup-form">
+                        <div class="form-group">
+                            <label for="signup_name">Full Name</label>
+                            <input type="text" id="signup_name" name="name" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="signup_email">Email Address</label>
+                            <input type="email" id="signup_email" name="email" required placeholder="your.email@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="signup_password">Password</label>
+                            <input type="password" id="signup_password" name="password" required placeholder="Choose a secure password">
+                        </div>
+                        <button type="submit" class="auth-submit-btn">Sign Up</button>
+                    </form>
+                    <p class="switch-link">Already a member? <a href="#" id="to-signin" class="green-text bold">Sign In</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Footer -->
+    <footer class="pro-footer">
+        <div class="footer-social-bar">
+            <!-- Social Icons (Dummy links) -->
+            <a href="#" class="social-icon-link animated-icon" aria-label="LinkedIn"><img src="https://img.icons8.com/color/48/000000/linkedin.png" alt="LinkedIn"></a>
+            <a href="#" class="social-icon-link animated-icon" aria-label="Twitter"><img src="https://img.icons8.com/color/48/000000/twitter--v1.png" alt="Twitter"></a>
+            <a href="#" class="social-icon-link animated-icon" aria-label="Facebook"><img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook"></a>
+            <a href="#" class="social-icon-link animated-icon" aria-label="Instagram"><img src="https://img.icons8.com/color/48/000000/instagram-new--v1.png" alt="Instagram"></a>
+            <a href="#" class="social-icon-link animated-icon" aria-label="YouTube"><img src="https://img.icons8.com/color/48/000000/youtube-play.png" alt="YouTube"></a>
+        </div>
+        <div class="footer-contact-details">
+            <span class="detail-item email-detail">
+                <i class="icon">📧</i> <a href="mailto:info@eyecareai.com">info@eyecareai.com</a>
+            </span>
+            <span class="detail-item phone-detail">
+                <i class="icon">📞</i> (91) 987-AI-EYE
+            </span>
+            <span class="detail-item address-detail">
+                <i class="icon">📍</i> EyeCare AI, HealthTech Hub, INDIA
+            </span>
+        </div>
+        <div class="footer-bottom-bar">
+            <p>&copy; 2025 EyeCare AI. All Rights Reserved.</p>
+            <nav class="footer-nav-links">
+                <a href="{{ url_for('about') }}">About</a>
+                <a href="#">Team</a>
+                <a href="#">Contact</a>
+                <a href="#">Legal</a>
+            </nav>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Switching Forms (Final Fix) -->
+    <script>
+    const authWrapper = document.getElementById('auth-wrapper');
+    const visualPanel = document.getElementById('visual-panel');
+    
+    const signInLink = document.getElementById('to-signin');
+    const signUpLink = document.getElementById('to-signup');
+
+    const visualSignUp = document.querySelector('.visual-signup');
+    const visualSignIn = document.querySelector('.visual-signin');
+    
+    const signInBox = document.getElementById('sign-in-box');
+    const signUpBox = document.getElementById('sign-up-box');
+    
+    // --- Helper Functions ---
+    
+    // Sign Up मोड में स्विच करें (अर्थात, 'right-panel-active' क्लास जोड़ें)
+    function switchToSignUp() {
+
+    if (window.innerWidth > 768) {
+        authWrapper.classList.add('right-panel-active');
+    }
+
+    signInBox.classList.remove('active-form');
+    signUpBox.classList.add('active-form');
+
+    // ✅ Ye sahi logic hai
+    visualSignIn.classList.remove('active-visual');
+    visualSignUp.classList.add('active-visual');
+}
+
+    // Sign In मोड में स्विच करें (अर्थात, 'right-panel-active' क्लास हटाएँ)
+    function switchToSignIn() {
+        // 1. Sliding effect: Visual panel को वापस ओरिजिनल पोजीशन पर लाएँ
+        if (window.innerWidth > 768) {
+            authWrapper.classList.remove('right-panel-active');
+        }
+        
+        // 2. Forms Switch: Sign In फॉर्म दिखाएँ
+        signUpBox.classList.remove('active-form');
+        signInBox.classList.add('active-form');
+
+        // 3. Visuals Switch: Sign Up विज़ुअल दिखाएँ (यह अब दिखाई देगा)
+        visualSignIn.classList.remove('active-visual');
+        visualSignUp.classList.add('active-visual');
+    }
+
+    // --- Event Listeners ---
+    
+    if (signUpLink) {
+        signUpLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            switchToSignUp();
+        });
+    }
+    
+    if (signInLink) {
+        signInLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            switchToSignIn();
+        });
+    }
+    
+    // --- Initial Load Logic ---
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const formParam = urlParams.get('form');
+
+        // अगर URL में 'signup' पैरामीटर है या फ्लैश मैसेज Sign Up से आया है, तो Sign Up दिखाएँ
+        if (formParam === 'signup') {
+            setTimeout(switchToSignUp, 50); // थोड़ी देरी दें
+        } else {
+            // डिफ़ॉल्ट: Sign In दिखाएँ
+            setTimeout(switchToSignIn, 50);
+        }
+    });
+    
+    // --- Resize Logic ---
+    
+    window.addEventListener('resize', () => {
+        if (window.innerWidth <= 768) {
+            // छोटी स्क्रीन पर, sliding class हटा दें (केवल opacity स्विच काम करेगा)
+            authWrapper.classList.remove('right-panel-active');
+        } else {
+            // बड़ी स्क्रीन पर, अगर Sign Up active है तो sliding class वापस जोड़ दें
+            if (signUpBox.classList.contains('active-form')) {
+                authWrapper.classList.add('right-panel-active');
+            }
+        }
+    });
+</script>
+</body>
+</html>

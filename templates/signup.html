@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Sign Up - EyeCare AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo">
+    <a href="{{ url_for('home') }}">
+        <img src="{{ url_for('static', filename='logo.jpg') }}" alt="EyeCare AI Logo">
+    </a>
+</div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+                <li><a href="{{ url_for('diseases_info') }}">Diseases Info</a></li>
+                <li><a href="{{ url_for('login') }}" class="cta-button active-login">Sign In/Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flashes">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <section class="login-container">
+        <div class="login-card animated-fade-in">
+            <h2>Create Your <span class="green-text">Account</span></h2>
+            <p>Join us to access our AI-powered eye analysis tool.</p>
+            
+            <form method="POST" action="{{ url_for('signup') }}">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required placeholder="John Doe">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Choose a secure password">
+                </div>
+
+                <button type="submit" class="login-submit-btn animated-button">
+                    Sign Up
+                </button>
+            </form>
+
+            <div class="switch-auth">
+                <p>Already have an account? <a href="{{ url_for('login') }}" class="green-text bold">Sign In</a></p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="pro-footer">
+        <div class="footer-social-bar">
+            <a href="https://www.linkedin.com/in/sharad-sharma-4918a4257/" class="social-icon-link animated-icon" aria-label="LinkedIn"><img src="https://img.icons8.com/color/48/000000/linkedin.png" alt="LinkedIn"></a>
+            <a href="#" class="social-icon-link animated-icon" aria-label="Twitter"><img src="https://img.icons8.com/color/48/000000/twitter--v1.png" alt="Twitter"></a>
+            <a href="#" class="social-icon-link animated-icon" aria-label="Facebook"><img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook"></a>
+            <a href="https://www.instagram.com/sharad_sh_0/" class="social-icon-link animated-icon" aria-label="Instagram"><img src="https://img.icons8.com/color/48/000000/instagram-new--v1.png" alt="Instagram"></a>
+            <!-- <a href="#" class="social-icon-link animated-icon" aria-label="YouTube"><img src="https://img.icons8.com/color/48/000000/youtube-play.png" alt="YouTube"></a> -->
+        </div>
+
+        <div class="footer-contact-info">
+            <p class="tagline">Dedicated to providing reliable AI-powered preliminary eye screening.</p>
+            <p class="tagline">Based in India, serving global eye health needs.</p>
+        </div>
+        
+        <div class="footer-contact-details">
+            <span class="detail-item email-detail">
+                <i class="icon">📧</i> <a href="mailto:info@eyecareai.com">info@eyecareai.com</a>
+            </span>
+            <span class="detail-item phone-detail">
+                <i class="icon">📞</i> (91) 9084739343
+            </span>
+            <span class="detail-item address-detail">
+                <i class="icon">📍</i> EyeCare AI, HealthTech Hub, INDIA
+            </span>
+        </div>
+
+        <div class="footer-bottom-bar">
+            <p>&copy; 2025 EyeCare AI. All Rights Reserved.</p>
+            <nav class="footer-nav-links">
+                <a href="{{ url_for('about') }}">About</a>
+                <a href="#">Team</a>
+                <a href="#">Testimonials</a>
+                <a href="#">Contact</a>
+                <a href="#">Legal</a>
+            </nav>
+        </div>
+    </footer>
+
+</body>
+</html>

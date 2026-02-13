@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease Prediction - Secure Portal</title>
+    <!-- सामान्य CSS फ़ाइल -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <!-- Prediction Page के लिए विशिष्ट CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/prediction.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header class="main-header">
+        <div class="logo">
+    <a href="{{ url_for('home') }}">
+        <img src="{{ url_for('static', filename='logo.jpg') }}" alt="EyeCare AI Logo">
+    </a>
+</div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+                <li><a href="{{ url_for('diseases_info') }}">Diseases Info</a></li>
+                <!-- Prediction लिंक सक्रिय (active) होगा -->
+                <li><a href="{{ url_for('prediction') }}" class="cta-button active-prediction">Prediction</a></li>
+                <li><a href="{{ url_for('logout') }}" class="cta-button">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Flashed Messages Section (लॉगिन/मॉडल संदेश दिखाने के लिए) -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flashes">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Prediction Section -->
+    <section class="prediction-section">
+        <h1 class="page-title">Secure <span class="green-text">Image Analysis</span> Portal</h1>
+        {% if user_name %}
+            <p class="subtitle">Welcome back, {{ user_name }}. Upload the retinal image below.</p>
+        {% else %}
+            <p class="subtitle">Upload the retinal image to get AI-powered disease prediction.</p>
+        {% endif %}
+
+        <!-- Image Upload Form -->
+        <div class="upload-card animated-card">
+            <h2>Upload Retinal Image</h2>
+            <form method="POST" action="{{ url_for('prediction') }}" enctype="multipart/form-data">
+                <div class="file-upload-wrapper">
+                    <input type="file" id="retina_image" name="retina_image" accept="image/*" required onchange="displayFileName(this)">
+                    <label for="retina_image" class="file-label">
+                        <span class="upload-icon">⬆️</span>
+                        <span id="file-name">Choose File (JPG, PNG)</span>
+                    </label>
+                </div>
+                
+                <button type="submit" class="analyze-btn animated-button" id="analyze-button">
+                    Analyze Image
+                </button>
+            </form>
+        </div>
+
+        <!-- Prediction Result Display -->
+        {% if result %}
+            <div class="result-card animated-result">
+                <h2>Prediction Result:</h2>
+                <div class="result-details">
+                    <p><strong>Predicted Disease:</strong> <span class="result-disease">{{ result.disease }}</span></p>
+                    <p><strong>Confidence Score:</strong> <span class="result-confidence">{{ result.confidence }}</span></p>
+                    <p class="advice-text"><strong>Medical Advice:</strong> {{ result.advice }}</p>
+                </div>
+                <div class="disclaimer-note">
+                    ⚠️ This result is AI-generated and requires confirmation by a medical professional.
+                </div>
+            </div>
+        {% endif %}
+    </section>
+
+    <!-- Detailed Footer Section -->
+    <footer class="pro-footer">
+        <div class="footer-social-bar">
+            <!-- Social Icons (Dummy links) -->
+            <a href="#" class="social-icon-link animated-icon" aria-label="LinkedIn"><img src="https://img.icons8.com/color/48/000000/linkedin.png" alt="LinkedIn"></a>
+            <a href="#" class="social-icon-link animated-icon" aria-label="Twitter"><img src="https://img.icons8.com/color/48/000000/twitter--v1.png" alt="Twitter"></a>
+            <a href="#" class="social-icon-link animated-icon" aria-label="Facebook"><img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook"></a>
+            <a href="#" class="social-icon-link animated-icon" aria-label="Instagram"><img src="https://img.icons8.com/color/48/000000/instagram-new--v1.png" alt="Instagram"></a>
+            <a href="#" class="social-icon-link animated-icon" aria-label="YouTube"><img src="https://img.icons8.com/color/48/000000/youtube-play.png" alt="YouTube"></a>
+        </div>
+        <div class="footer-contact-details">
+            <span class="detail-item email-detail">
+                <i class="icon">📧</i> <a href="mailto:info@eyecareai.com">info@eyecareai.com</a>
+            </span>
+            <span class="detail-item phone-detail">
+                <i class="icon">📞</i> (91) 987-AI-EYE
+            </span>
+            <span class="detail-item address-detail">
+                <i class="icon">📍</i> EyeCare AI, HealthTech Hub, INDIA
+            </span>
+        </div>
+        <div class="footer-bottom-bar">
+            <p>&copy; 2025 EyeCare AI. All Rights Reserved.</p>
+            <nav class="footer-nav-links">
+                <a href="{{ url_for('about') }}">About</a>
+                <a href="#">Team</a>
+                <a href="#">Contact</a>
+                <a href="#">Legal</a>
+            </nav>
+        </div>
+    </footer>
+
+    <!-- JavaScript for display file name and basic validation -->
+    <script>
+        function displayFileName(input) {
+            const fileNameSpan = document.getElementById('file-name');
+            if (input.files && input.files.length > 0) {
+                fileNameSpan.textContent = input.files[0].name;
+            } else {
+                fileNameSpan.textContent = 'Choose File (JPG, PNG)';
+            }
+        }
+    </script>
+</body>
+</html>

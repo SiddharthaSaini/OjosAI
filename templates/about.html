@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - EyeCare AI</title>
+    <!-- सामान्य CSS फ़ाइल -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <!-- About Page के लिए विशिष्ट CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header class="main-header">
+        <div class="logo">
+    <a href="{{ url_for('home') }}">
+        <img src="{{ url_for('static', filename='logo.jpg') }}" alt="EyeCare AI Logo">
+    </a>
+</div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}" class="active">About</a></li>
+                <li><a href="{{ url_for('diseases_info') }}">Diseases Info</a></li>
+                {% if session.get('logged_in') %}
+                    <li><a href="{{ url_for('prediction') }}">Prediction</a></li>
+                    <li><a href="{{ url_for('logout') }}" class="cta-button">Logout</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('login') }}" class="cta-button">Sign In/Up</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <h1 class="page-title">Our <span class="green-text">Mission</span> and Technology</h1>
+        <p class="subtitle">Bringing advanced AI screening to eye health.</p>
+
+        <div class="content-box mission-vision animated-box">
+            <h2>The Vision Behind EyeCare AI</h2>
+            <p>Our primary mission is to democratize **early eye disease detection**. Millions suffer from preventable vision loss due to late diagnosis of conditions like Glaucoma and Diabetic Retinopathy. We aim to provide a **fast, accessible, and supplementary screening tool** powered by cutting-edge machine learning.</p>
+        </div>
+
+        <div class="tech-stack-section">
+            <div class="content-box animated-box">
+                <h2>🔬 Deep Learning Model (The Core)</h2>
+                <p>The heart of our system is a custom-trained **Convolutional Neural Network (CNN)**. This model is trained on thousands of retinal images to accurately identify subtle visual markers associated with:</p>
+                <ul>
+                    <li>**Glaucoma:** Damage to the optic nerve.</li>
+                    <li>**Cataract:** Clouding of the eye lens.</li>
+                    <li>**Diabetic Retinopathy:** Damage to retinal blood vessels due to diabetes.</li>
+                    <li>**Myopia:** Excessive elongation of the eyeball (nearsightedness).</li>
+                </ul>
+            </div>
+            
+            <div class="content-box animated-box">
+                <h2>💻 Frontend Technology Stack</h2>
+                <p>To ensure a secure, fast, and user-friendly experience, we utilized modern web technologies:</p>
+                <div class="tech-grid">
+                    <div class="tech-item"><span class="green-text">Python Flask:</span> Backend routing and secure session management.</div>
+                    <div class="tech-item"><span class="green-text">HTML5 & CSS3:</span> Clean, responsive structure and medical-themed styling.</div>
+                    <div class="tech-item"><span class="green-text">JavaScript:</span> Enhancing interactivity and managing client-side animations.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-box disclaimer-final animated-box">
+            <h2 class="green-text">Disclaimer of AI Screening</h2>
+            <p>While our model provides a highly accurate preliminary analysis, it is **not a substitute for a professional eye examination**. Always consult a qualified ophthalmologist or optometrist for a final diagnosis and treatment plan. We provide information; only doctors provide diagnosis.</p>
+        </div>
+        
+        <a href="{{ url_for('prediction') }}" class="main-cta-button start-now-button">Start Your Secure Analysis →</a>
+    </section>
+
+    <!-- Detailed Footer Section -->
+    <footer class="pro-footer">
+        <div class="footer-social-bar">
+            <!-- Social Icons (Dummy links) -->
+            <a href="#" class="social-icon-link animated-icon" aria-label="LinkedIn"><img src="https://img.icons8.com/color/48/000000/linkedin.png" alt="LinkedIn"></a>
+            <a href="#" class="social-icon-link animated-icon" aria-label="Twitter"><img src="https://img.icons8.com/color/48/000000/twitter--v1.png" alt="Twitter"></a>
+            <a href="#" class="social-icon-link animated-icon" aria-label="Facebook"><img src="https://img.icons8.com/color/48/000000/facebook-new.png" alt="Facebook"></a>
+            <a href="#" class="social-icon-link animated-icon" aria-label="Instagram"><img src="https://img.icons8.com/color/48/000000/instagram-new--v1.png" alt="Instagram"></a>
+            <a href="#" class="social-icon-link animated-icon" aria-label="YouTube"><img src="https://img.icons8.com/color/48/000000/youtube-play.png" alt="YouTube"></a>
+        </div>
+        <div class="footer-contact-details">
+            <span class="detail-item email-detail">
+                <i class="icon">📧</i> <a href="mailto:info@eyecareai.com">info@eyecareai.com</a>
+            </span>
+            <span class="detail-item phone-detail">
+                <i class="icon">📞</i> (91) 987-AI-EYE
+            </span>
+            <span class="detail-item address-detail">
+                <i class="icon">📍</i> EyeCare AI, HealthTech Hub, INDIA
+            </span>
+        </div>
+        <div class="footer-bottom-bar">
+            <p>&copy; 2025 EyeCare AI. All Rights Reserved.</p>
+            <nav class="footer-nav-links">
+                <a href="{{ url_for('about') }}">About</a>
+                <a href="#">Team</a>
+                <a href="#">Contact</a>
+                <a href="#">Legal</a>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>
