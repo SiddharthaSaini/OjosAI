@@ -1,8 +1,6 @@
-flask
-gunicorn
-tensorflow==2.10.0
-keras==2.10.0
+flask==3.0.3
+gunicorn==21.2.0
+tensorflow==2.12.1
 numpy==1.23.5
-scipy==1.9.3
-opencv-python-headless
-pillow
+opencv-python-headless==4.8.1.78
+pillow==10.2.0
