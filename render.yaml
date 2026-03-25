@@ -2,8 +2,7 @@ services:
   - type: web
     name: eyes-disease-detection
     env: python
+    pythonVersion: 3.11
     plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn app:app
-    runtime: python
-    pythonVersion: 3.11.9
